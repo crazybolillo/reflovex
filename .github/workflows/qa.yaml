@@ -44,7 +44,7 @@ jobs:
       - name: Set env.testing
         run: |
           cp .env.example .env.testing
-          sed -i 's/\(DB_CONNECTION=\).*/\1postgresql/' .env.testing
+          sed -i 's/\(DB_CONNECTION=\).*/\1pgsql/' .env.testing
           sed -i 's/\(DB_PORT=\).*/\15432/' .env.testing
           sed -i '/DB_PASSWORD=/ s/$/reflovex/' .env.testing
           php artisan key:generate --env=testing
