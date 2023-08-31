@@ -49,5 +49,17 @@ jobs:
           sed -i '/DB_PASSWORD=/ s/$/reflovex/' .env.testing
           php artisan key:generate --env=testing
           cat .env.testing
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install npm dependencies
+        run: |
+          npm install
+          npm run build
+      - name: Run migrations
+        run: |
+          php artisan migrate --env=testing
       - name: Run tests
         run: php artisan test
